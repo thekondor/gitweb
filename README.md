@@ -11,7 +11,7 @@ load when start image load file in
 
 - SET_CONTAINER_TIMEZONE (false or true) manage time of container
 - CONTAINER_TIMEZONE timezone of container
-- GITPROJECT
+- GITPROJECTS (list of projects separated with `,`)
 - GITUSER (default gituser)
 - GITPASSWORD (default gitpassword)
 - IHM (default "")
@@ -35,7 +35,7 @@ load when start image load file in
 
 run image fraoustin/gitweb
 
-    docker run -d -e "CONTAINER_TIMEZONE=Europe/Paris" -e "GITPROJECT=test" -v <localpath>:/var/lib/git --name test -p 80:80 fraoustin/gitweb
+    docker run -d -e "CONTAINER_TIMEZONE=Europe/Paris" -e "GITPROJECTS=test-foo,test-bar" -v <localpath>:/var/lib/git --name test -p 80:80 fraoustin/gitweb
 
 user default is gituser and password default is gitpassword
 
@@ -85,5 +85,5 @@ If you want use a new design for ihm, you can use IHM variable
 
 - IHM = mdl
 
-    docker run -d -e "CONTAINER_TIMEZONE=Europe/Paris" -e "IHM=mdl" -e "GITPROJECT=test" -v <localpath>:/var/lib/git --name test -p 80:80 fraoustin/gitweb
+    docker run -d -e "CONTAINER_TIMEZONE=Europe/Paris" -e "IHM=mdl" -e "GITPROJECTS=test" -v <localpath>:/var/lib/git --name test -p 80:80 fraoustin/gitweb
 
