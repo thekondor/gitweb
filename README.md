@@ -1,3 +1,10 @@
+> This fork contain small improvements to handle some specific cases (and making them universal) not covered by the original implementation. Basically:
+> - Multiple git projects `vs` single one
+> - Host user's ID & GID mapping to a container `vs` default `nginx`'s ones
+> - Mount of host's `.htpasswd` `vs` managing internal one
+
+> All credits for this Dockerfile go to [fraoustin/gitweb](https://github.com/fraoustin/gitweb)
+
 # Docker Image for gitweb
 
 generate a nginx server with git server and gitweb for ihm on http://127.0.0.1/
