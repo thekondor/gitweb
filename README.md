@@ -9,18 +9,21 @@ load when start image load file in
 
 ## Parameter
 
-- SET_CONTAINER_TIMEZONE (false or true) manage time of container
-- CONTAINER_TIMEZONE timezone of container
-- GITPROJECTS (list of projects separated with `,`)
-- GITUSER (default gituser)
-- GITPASSWORD (default gitpassword)
-- IHM (default "")
-- UID_REMAP (default ""): to set `nginx`'s UID
-- GID_REMAP (default ""): to set `nginx`'s primary GID
+- `SET_CONTAINER_TIMEZONE` (false or true) manage time of container
+- `CONTAINER_TIMEZONE` timezone of container
+- `GITPROJECTS` (list of projects separated with `,`)
+- `GITUSER` (default: `gituser`)
+- `GITPASSWORD` (default: `gitpassword`)
+- `IHM` (default: `""`)
+- `UID_REMAP` (default: `""`): to set `nginx`'s UID
+- `GID_REMAP` (default: `""`): to set `nginx`'s primary GID
+
+**NOTE**: `GITUSER` & `GITPASSWORD` are not taken into account when `/etc/nginx/htpasswd.base` volume is mounted. They should be added explicitly then.
 
 ## Volume
 
 - /var/lib/git
+- /etc/nginx/htpasswd.base
 
 **NOTE**: by default all r/w access to contents of repositories inside the volume is made by `nginx:nginx` user. When the volume is mounted externally, that makes sense to make `nginx`'s user to reflects runner's ID and GID from the host. Otherwise access issues is thing to deal with.
 
@@ -36,6 +39,8 @@ Basically: `docker run [...] -e UID_REMAP=$(id -u) -e GID_REMAP=$(id -g) [...]`
 - addauth : add user for git
 - rmrepos : remove repository
 - rmauth : remove user
+
+**NOTE**: keep in mind `htpasswd.base`'s ACL once it is mounted as a volume.
 
 ## Usage direct
 

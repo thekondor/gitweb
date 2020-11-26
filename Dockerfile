@@ -8,6 +8,8 @@ RUN chmod +x /entrypoint.sh
 
 ENV SET_CONTAINER_TIMEZONE false 
 ENV CONTAINER_TIMEZONE "" 
+ENV _HTPASSWD /etc/nginx/.htpasswd
+ENV _BASE_HTPASSWD /etc/nginx/htpasswd.base
 
 RUN apt-get update && apt-get install -y \
         apache2-utils \
@@ -53,6 +55,7 @@ RUN cp /usr/share/gitweb/static/gitweb.css /usr/share/gitweb/static/gitweb.css.o
 RUN mkdir /usr/share/gitweb/ihm
 
 VOLUME /var/lib/git
+VOLUME /etc/nginx/htpasswd.base
 EXPOSE 80
 
 ENTRYPOINT ["/entrypoint.sh"]
