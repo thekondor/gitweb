@@ -33,6 +33,7 @@ if [ "$1" = 'app' ]; then
     service fcgiwrap start
     nginx -g "daemon off;"
     /bin/run-parts --verbose --regex '\.(sh)$' "/usr/share/gitweb/docker-entrypoint.post"
+    exit $?
 fi
 
 exec "$@"
