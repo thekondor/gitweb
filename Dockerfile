@@ -27,7 +27,9 @@ RUN sed -i "s/www-data/nginx/g" /etc/init.d/fcgiwrap
 # manage start container
 RUN mkdir /usr/share/gitweb/docker-entrypoint.pre
 RUN mkdir /usr/share/gitweb/docker-entrypoint.post
-COPY ./src/00_init.sh /usr/share/gitweb/docker-entrypoint.pre/00_init.sh
+COPY ./src/00_user_ids.sh /usr/share/gitweb/docker-entrypoint.pre/00_user_ids.sh
+COPY ./src/01_git_projects.sh /usr/share/gitweb/docker-entrypoint.pre/01_git_projects.sh
+COPY ./src/02_auth.sh /usr/share/gitweb/docker-entrypoint.pre/02_auth.sh
 RUN chmod +x -R /usr/share/gitweb/docker-entrypoint.pre
 
 # add cmd gitweb

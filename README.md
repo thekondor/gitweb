@@ -15,10 +15,16 @@ load when start image load file in
 - GITUSER (default gituser)
 - GITPASSWORD (default gitpassword)
 - IHM (default "")
+- UID_REMAP (default ""): to set `nginx`'s UID
+- GID_REMAP (default ""): to set `nginx`'s primary GID
 
 ## Volume
 
 - /var/lib/git
+
+**NOTE**: by default all r/w access to contents of repositories inside the volume is made by `nginx:nginx` user. When the volume is mounted externally, that makes sense to make `nginx`'s user to reflects runner's ID and GID from the host. Otherwise access issues is thing to deal with.
+
+Basically: `docker run [...] -e UID_REMAP=$(id -u) -e GID_REMAP=$(id -g) [...]`
 
 ## Port
 
