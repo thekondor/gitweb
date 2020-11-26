@@ -11,7 +11,7 @@ ENV CONTAINER_TIMEZONE ""
 ENV _HTPASSWD /etc/nginx/.htpasswd
 ENV _BASE_HTPASSWD /etc/nginx/htpasswd.base
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
         apache2-utils \
         fcgiwrap \
         git \
