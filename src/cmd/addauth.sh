@@ -1,5 +1,4 @@
 #!/bin/bash
-FPASS="/etc/nginx/.htpasswd"
  
 error(){ 
     	echo "ERROR : parameters invalid !" >&2 
@@ -12,11 +11,11 @@ usage(){
 } 
 
 load(){
-	if [ ! -f $FPASS ]; then
-  		htpasswd -bc $FPASS $1 $2
-	else
-      htpasswd -b $FPASS $1 $2 
-	fi
+    if [ ! -f ${_HTPASSWD} ]; then
+        htpasswd -bc ${_HTPASSWD} $1 $2
+    else
+        htpasswd -b ${_HTPASSWD} $1 $2
+    fi
 }
 
 # no parameters
