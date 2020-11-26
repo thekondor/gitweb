@@ -1,5 +1,6 @@
 FROM nginx:1.19
-LABEL maintainer "fraoustin@gmail.com"
+LABEL maintainer "github.com/thekondor"
+LABEL original_maintainer "fraoustin@gmail.com"
 
 COPY ./src/default.conf /etc/nginx/conf.d/default.conf
 
