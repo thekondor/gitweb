@@ -3,17 +3,16 @@ LABEL maintainer "github.com/thekondor"
 LABEL original_maintainer "fraoustin@gmail.com"
 
 COPY ./src/default.conf /etc/nginx/conf.d/default.conf
+COPY ./src/fastcgi.conf /etc/nginx/conf.d/fastcgi.conf
 
 COPY ./src/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
 ENV SET_CONTAINER_TIMEZONE false 
 ENV CONTAINER_TIMEZONE "" 
-ENV _HTPASSWD /etc/nginx/.htpasswd
-ENV _BASE_HTPASSWD /etc/nginx/htpasswd.base
+ENV ALLOW_RO_ACCESS ""
 
 RUN apt-get update && apt-get install -y --no-install-recommends --no-install-suggests \
-        apache2-utils \
         fcgiwrap \
         git \
         git-core \
@@ -37,17 +36,9 @@ RUN chmod +x -R /usr/share/gitweb/docker-entrypoint.pre
 
 # add cmd gitweb
 COPY ./src/cmd/addrepos.sh /usr/bin/addrepos
-COPY ./src/cmd/addauth.sh /usr/bin/addauth
 COPY ./src/cmd/rmrepos.sh /usr/bin/rmrepos
-COPY ./src/cmd/rmauth.sh /usr/bin/rmauth
 RUN chmod +x /usr/bin/addrepos
-RUN chmod +x /usr/bin/addauth
 RUN chmod +x /usr/bin/rmrepos
-RUN chmod +x /usr/bin/rmauth
-
-# manage default value
-ENV GITUSER gituser
-ENV GITPASSWORD gitpassword
 
 # add ihm mdl
 ENV IHM no-mdl
@@ -56,7 +47,7 @@ RUN cp /usr/share/gitweb/static/gitweb.css /usr/share/gitweb/static/gitweb.css.o
 RUN mkdir /usr/share/gitweb/ihm
 
 VOLUME /var/lib/git
-VOLUME /etc/nginx/htpasswd.base
+VOLUME /etc/nginx/.htpasswd
 EXPOSE 80
 
 ENTRYPOINT ["/entrypoint.sh"]

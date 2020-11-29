@@ -103,5 +103,7 @@ If you want use a new design for ihm, you can use IHM variable
 
 - IHM = mdl
 
+    ```sh
     docker run -d -e "CONTAINER_TIMEZONE=Europe/Paris" -e "IHM=mdl" -e "GITPROJECTS=test" -v <localpath>:/var/lib/git --name test -p 80:80 fraoustin/gitweb
+    ```
 
